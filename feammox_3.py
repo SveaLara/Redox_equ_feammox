@@ -19,7 +19,7 @@ NH4 = NH4_input * 10**(-3) # changing [mg/L] in [g/L]
 R = 0.008314 #kJ mol^-1
 T = 297.15 #Kelvin
 
-C_A = 1 # mol L^-1 -> concentration
+C_A = 1 # mol L^-1 -> activity probably in [mol/L]
 G0_fA = -699 #kJ mol^-1 -> Fe(OH)3 -> defined
 
 G0_fB = 0 #pH*(-5.69) #kJ mol^-1 -> H+ -> variable ?????
@@ -146,7 +146,7 @@ st.plotly_chart(fig2)
 #------------------ tables of fixed values -------------------------------
 data = {
     "Component": ["Fe(OH)₃", "H⁺", "NH₄⁺", "Fe²⁺", "H₂O", product],
-    "Concentration [mol/L]": [
+    "Activity": [
         f"{C_A:.0f}",
         f"{10**(-pH):.2e}",
         f"{NH4:.4f}",
