@@ -150,7 +150,7 @@ data = {
     "Activity": [
         f"{C_A:.0f}",
         f"{10**(-pH):.2e}",
-        f"{NH4:.4f}",
+        f"{NH4:.0f}",
         f"{C_D:.2e}",
         f"{C_E:.0f}",
         f"{NH4:.2e}"
