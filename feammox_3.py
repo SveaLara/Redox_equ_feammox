@@ -15,7 +15,7 @@ equation_choice = st.selectbox(
     ("(1) 3Fe(OH)₃ + 5H⁺ + NH₄⁺ → 3Fe²⁺ + 9H₂O + 0.5N₂", "(2) 6Fe(OH)₃ + 10H⁺ + NH₄⁺ → 6Fe²⁺ + 16H₂O + NO₂⁻", "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H₂O + NO₃⁻")
 )
 pH = st.number_input("pH", min_value=1.0, max_value=14.0, value=5.0, step=0.1)
-NH4 = st. number_input("NH₄⁺ concentration [mol/L]", min_value=0.0, max_value=10.0, value=2.0, step=0.001) # [mmol/L]
+NH4 = st.number_input("NH₄⁺ concentration [mol/L]", min_value=0.0, max_value=10.0, value=2.0, step=0.001) # [mmol/L]
 #NH4 = NH4_input * 10**(-3) #changing [mmol/L] in [mol/L]
 R = 0.008314 #kJ mol^-1
 T = 297.15 #Kelvin
@@ -68,7 +68,7 @@ elif equation_choice == "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H�
     G0_fF = -111.3  # kJ mol^-1 -> NO3- -> defined
 
 # calculation of ΔG
-st.write(f"ΔG for pH = {pH} and NH₄⁺ = {NH4_input} mol/L is **{func_G_r(pH, NH4):.2f} kJ/mol**")
+st.write(f"ΔG for pH = {pH} and NH₄⁺ = {NH4} mol/L is **{func_G_r(pH, NH4):.2f} kJ/mol**")
 
 
 #--------------------- figures ------------------------------------
