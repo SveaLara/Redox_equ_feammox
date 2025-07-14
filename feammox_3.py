@@ -15,8 +15,9 @@ equation_choice = st.selectbox(
     ("(1) 3Fe(OH)₃ + 5H⁺ + NH₄⁺ → 3Fe²⁺ + 9H₂O + 0.5N₂", "(2) 6Fe(OH)₃ + 10H⁺ + NH₄⁺ → 6Fe²⁺ + 16H₂O + NO₂⁻", "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H₂O + NO₃⁻")
 )
 pH = st.number_input("pH", min_value=1.0, max_value=14.0, value=5.0, step=0.1)
-NH4 = st.number_input("NH₄⁺ concentration [mol/L]", min_value=0.0, max_value=10.0, value=2.0, step=0.001) # [mmol/L]
-#NH4 = NH4_input * 10**(-3) #changing [mmol/L] in [mol/L]
+NH4_input = st. number_input("NH₄⁺ concentration [mol/L]", min_value=0.0001, max_value=1.000, value=0.100, step=0.0001, format="%.3f") # [mol/L]
+Fe2_input = st. number_input("Fe2 Activity [~mmol/l]", min_value=0.1, max_value=5.0, value=0.5, step=0.1, format="%.3f") # [mol/L]
+NH4 = NH4_input #* 10**(-3) # changing [mmol/L] in [mol/L]
 R = 0.008314 #kJ mol^-1
 T = 297.15 #Kelvin
 
@@ -28,7 +29,8 @@ G0_fB = 0 #pH*(-5.69) #kJ mol^-1 -> H+ -> variable ?????
 # NH4 #mol L^-1
 G0_fC = -79.37 #kJ mol^-1 -> NH4+ -> variable
 
-C_D = 10**(-12) #mol L^-1
+#= 10**(-12) #mol L^-1
+C_D = Fe2_input*10**(-3) # mol L^-1
 G0_fD = -78.87 #kJ mol^-1 -> Fe2+ -> defined
 
 C_E = 1 #mol L^-1
@@ -68,7 +70,7 @@ elif equation_choice == "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H�
     G0_fF = -111.3  # kJ mol^-1 -> NO3- -> defined
 
 # calculation of ΔG
-st.write(f"ΔG for pH = {pH} and NH₄⁺ = {NH4} mol/L is **{func_G_r(pH, NH4):.2f} kJ/mol**")
+st.write(f"ΔG for pH = {pH} and NH₄⁺ = {NH4_input} mol/L is **{func_G_r(pH, NH4):.2f} kJ/mol**")
 
 
 #--------------------- figures ------------------------------------
@@ -76,7 +78,7 @@ st.write(f"ΔG for pH = {pH} and NH₄⁺ = {NH4} mol/L is **{func_G_r(pH, NH4):
 pH_range = np.arange(1, 14, 0.1)
 NH4_range_mol = np.logspace(-3, 0, 200)# von 0.001 mmol/L bis 10 mmol/L, 200 Punkte
 
-G_r_values_NH4 = [func_G_r(pH, NH4*10**-3) for NH4 in NH4_range_mol]
+G_r_values_NH4 = [func_G_r(pH, NH4) for NH4 in NH4_range_mol] #*10**-3
 G_r_values_pH = [func_G_r(pH, NH4) for pH in pH_range]
 
 
@@ -98,14 +100,25 @@ fig1.add_shape(
     y0=0,
     x1=pH_range[-1],
     y1=0,
-    line=dict(color="white", width=1, dash="dash"),
+    line=dict(color="black", width=1, dash="dash"),
 )
 
 fig1.update_layout(
     title='ΔG in relation to pH (fixed NH₄⁺ conc.)',
-    xaxis_title='pH',
-    yaxis_title='ΔG [kJ/mol]',
-    xaxis=dict(tickmode='linear', dtick=1),
+    xaxis=dict(
+        title=dict(text='pH', font=dict(color='black')),
+        tickfont=dict(color='black'),
+        tickcolor='black',
+        showline=True,
+        linecolor='black'
+    ),
+    yaxis=dict(
+        title=dict(text='ΔG⁰<sub>f</sub> [kJ/mol]', font=dict(color='black')),
+        tickfont=dict(color='black'),
+        tickcolor='black',
+        showline=True,
+        linecolor='black'
+    ),
     template='simple_white'
 )
 
@@ -130,14 +143,47 @@ fig2.add_shape(
     y0=0,
     x1=NH4_range_mol[-1],
     y1=0,
-    line=dict(color="white", width=1, dash="dash"),
+    line=dict(color="black", width=1, dash="dash"),
 )
-
+fig1.update_layout(
+    title='ΔG in relation to pH (fixed NH₄⁺ conc.)',
+    xaxis=dict(
+        title=dict(text='pH', font=dict(color='black')),
+        tickfont=dict(color='black'),
+        tickcolor='black',
+        showline=True,
+        linecolor='black'
+    ),
+    yaxis=dict(
+        title=dict(text='ΔG⁰<sub>f</sub> [kJ/mol]', font=dict(color='black')),
+        tickfont=dict(color='black'),
+        tickcolor='black',
+        showline=True,
+        linecolor='black'
+    ),
+    template='simple_white'
+)
 fig2.update_layout(
     title='ΔG in relation to NH₄⁺ (fixed pH)',
-    xaxis_title='NH₄⁺ [mol/L]',
-    yaxis_title='ΔG [kJ/mol]',
     xaxis_type='log',
+    xaxis=dict(
+        title=dict(text='NH₄⁺ [mol/L]', font=dict(color='black')),
+        tickmode='linear',
+        dtick=1,
+        color='black',
+        showline=True,
+        linecolor='black',
+        tickfont=dict(color='black'),
+        tickcolor='black'
+    ),
+    yaxis=dict(
+        title=dict(text='ΔG [kJ/mol]', font=dict(color='black')),
+        color='black',
+        showline=True,
+        linecolor='black',
+        tickfont=dict(color='black'),
+        tickcolor='black'
+    ),
     template='simple_white'
 )
 
@@ -155,7 +201,7 @@ data = {
         f"{C_E:.0f}",
         f"{NH4:.2e}"
     ],
-    "ΔG⁰ [kJ/mol]": [
+    "ΔG⁰f [kJ/mol]": [
         f"{G0_fA:.0f}",
         f"{G0_fB:.0f}",
         f"{G0_fC:.2f}",
