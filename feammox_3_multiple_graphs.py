@@ -15,7 +15,7 @@ equation_choice = st.selectbox(
     ("(1) 3Fe(OH)₃ + 5H⁺ + NH₄⁺ → 3Fe²⁺ + 9H₂O + 0.5N₂", "(2) 6Fe(OH)₃ + 10H⁺ + NH₄⁺ → 6Fe²⁺ + 16H₂O + NO₂⁻", "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H₂O + NO₃⁻")
 )
 
-st.markdown("### Choose up to 3 NH₄⁺ concentrations [mol/L]")
+st.markdown("### Choose NH₄⁺ concentrations [mol/L]")
 NH4_list = st.multiselect(
     label="NH₄⁺ values for pH plot",
     options=[0.0001, 0.001, 0.01, 0.1, 0.5, 1.0, 10.0],
@@ -23,7 +23,7 @@ NH4_list = st.multiselect(
     format_func=lambda x: f"{x:.3f} mol/L"
 )
 
-st.markdown("### Choose up to 3 pH values")
+st.markdown("### Choose pH values")
 pH_list = st.multiselect(
     label="pH values for NH₄⁺ plot",
     options=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0],
