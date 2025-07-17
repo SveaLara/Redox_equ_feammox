@@ -81,7 +81,7 @@ if equation_choice == "(1) 3Fe(OH)₃ + 5H⁺ + NH₄⁺ → 3Fe²⁺ + 9H₂O +
 elif equation_choice == "(2) 6Fe(OH)₃ + 10H⁺ + NH₄⁺ → 6Fe²⁺ + 16H₂O + NO₂⁻":
     func_G_r = func_G_r_2
     product = "NO₂⁻"
-    C_F = 0.00001  # mol L^-1
+    C_F = 0.0001  # mol L^-1
     G0_fF = -37.2  # kJ mol^-1 -> NO2- -> defined
 elif equation_choice == "(3) 8Fe(OH)₃ + 14H⁺ + NH₄⁺ → 8Fe²⁺ + 21H₂O + NO₃⁻":
     func_G_r = func_G_r_3
@@ -217,7 +217,7 @@ data = {
         f"{NH4:.0f}",
         f"{C_D:.2e}",
         f"{C_E:.0f}",
-        f"{NH4:.2e}"
+        f"{C_F:.2e}"
     ],
     "ΔG⁰f [kJ/mol]": [
         f"{G0_fA:.0f}",
