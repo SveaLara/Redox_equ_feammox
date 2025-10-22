@@ -139,7 +139,7 @@ fig1.update_layout(
     template='simple_white'
 )
 
-st.plotly_chart(fig1, use_container_width=True, config={"toImageButtonOptions": {"scale": 3}})
+st.plotly_chart(fig1, use_container_width=True, config={"toImageButtonOptions": {"scale": 10}})
 
 
 #-------------------- figure 2 NH₄⁺ - fixed pH -------------------------
@@ -205,7 +205,7 @@ fig2.update_layout(
     template='simple_white'
 )
 
-st.plotly_chart(fig1, use_container_width=True, config={"toImageButtonOptions": {"scale": 3}})
+st.plotly_chart(fig2, use_container_width=True, config={"toImageButtonOptions": {"scale": 10}})
 
 
 #------------------ tables of fixed values -------------------------------
